@@ -1,0 +1,3 @@
+﻿  main.cpp
+main.obj : error LNK2019: unresolved external symbol "public: __cdecl Bytes::Bytes(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,enum BytesFormat const &)" (??0Bytes@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBW4BytesFormat@@@Z) referenced in function main
+C:\Users\chanc\Documents\Projects\cryptopals\CryptoPals\x64\Debug\01hex2base64.exe : fatal error LNK1120: 1 unresolved externals

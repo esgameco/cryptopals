@@ -10,8 +10,7 @@
 #include <cinttypes>
 #include <vector>
 
-#include "../lib/format.h"
-#include "../lib/xor.h"
+#include <bytes.h>
 
 int main(void)
 {
@@ -23,16 +22,12 @@ int main(void)
     std::cout << "Input additional hex value: " << std::endl;
     std::cin >> input2;
 
-    Convert* convert = new Convert();
-    Format* format = new Format();
-    Xor* xorCipher = new Xor();
-    std::vector<uint8_t> baseHexBytes = convert->getHexBytes(input1);
-    std::vector<uint8_t> addHexBytes = convert->getHexBytes(input2);
-    
-    std::cout << format->getHexString(xorCipher->fixedXor(baseHexBytes, addHexBytes)) << std::endl;
+    Bytes bytes1 = Bytes(input1, BytesFormat::hex);
+    Bytes bytes2 = Bytes(input2, BytesFormat::hex);
 
-    delete convert;
-    delete format;
+    Bytes xored = bytes1.fixedXor(bytes2);
+    
+    std::cout << xored.displayInFormat(BytesFormat::hex) << std::endl;
 
     return 0;
 }

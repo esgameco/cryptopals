@@ -10,7 +10,7 @@
 #include <cinttypes>
 #include <vector>
 
-#include "../lib/bytes.h"
+#include <bytes.h>
 
 int main(void)
 {
@@ -19,11 +19,9 @@ int main(void)
     std::cout << "Input hex value: " << std::endl;
     std::cin >> input;
 
-    Bytes* bytes = new Bytes(input, BytesFormat::hex);
+    Bytes bytes = Bytes(input, BytesFormat::hex);
     
-    std::cout << bytes->displayInFormat(BytesFormat::base64) << std::endl;
-
-    delete bytes;
+    std::cout << bytes.displayInFormat(BytesFormat::base64) << std::endl;
 
     return 0;
 }

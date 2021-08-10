@@ -10,39 +10,27 @@
 #include <cinttypes>
 #include <vector>
 
-#include "../lib/format.h"
-#include "../lib/xor.h"
-#include "../lib/frequency.h"
+#include <bytes.h>
 
 int main(void)
 {
-    Convert* convert = new Convert();
-    Format* format = new Format();
-    Xor* xorCipher = new Xor();
-    Frequency* frequency = new Frequency();
-
     std::string input;
     char inputByte;
 
     std::cout << "Input hex value: " << std::endl;
     std::cin >> input;
 
-    std::cout << "Input xor byte value: " << std::endl;
-    std::cin >> inputByte;
+    //std::cout << "Input xor byte value: " << std::endl;
+    //std::cin >> inputByte;
 
-    std::vector<uint8_t> hexBytes = convert->getHexBytes(input);
-    uint8_t xorByte = convert->extractHex(inputByte);
+    Bytes bytes = Bytes(input, BytesFormat::hex);
 
-    std::vector<uint8_t> xoredBytes = xorCipher->singleByteXor(hexBytes, xorByte);
-    
-    std::vector<uint8_t> asciiBytes = convert->hexToAscii(xoredBytes);
-    std::cout << format->getAsciiString(asciiBytes) << std::endl;
+    for (int i = 0; i < 128; i++)
+    {
+        Bytes xored = bytes.singleByteXor(i);
 
-    std::vector<uint8_t> asciiFrequency = frequency->getAsciiFrequency(asciiBytes);
-
-    delete convert;
-    delete format;
-    delete xorCipher;
+        std::cout << xored.displayInFormat(BytesFormat::ascii) << std::endl;
+    }
 
     return 0;
 }
