@@ -1,5 +1,10 @@
 #include "bytes.h"
 
+std::unique_ptr<Format> Bytes::formater = std::make_unique<Format>();
+std::unique_ptr<Convert> Bytes::converter = std::make_unique<Convert>();
+std::unique_ptr<Xor> Bytes::xorer = std::make_unique<Xor>();
+std::unique_ptr<Frequency> Bytes::frequency = std::make_unique<Frequency>();
+
 /*
 
     Constructor Methods
@@ -7,26 +12,18 @@
 */
 
 Bytes::Bytes(const std::string& newBytes, const BytesFormat& format)
-    : format(BytesFormat::ascii),
-      formater(std::make_unique<Format>()),
-      converter(std::make_unique<Convert>()),
-      xorer(std::make_unique<Xor>())
+    : format(BytesFormat::ascii)
 {
     this->updateBytes<std::string>(newBytes, format);
 }
 Bytes::Bytes(const std::vector<uint8_t>& newBytes, const BytesFormat& format)
-    : format(BytesFormat::ascii),
-      formater(std::make_unique<Format>()),
-      converter(std::make_unique<Convert>()),
-      xorer(std::make_unique<Xor>())
+    : format(BytesFormat::ascii)
 {
     this->updateBytes<std::vector<uint8_t>>(newBytes, format);
 }
 Bytes::Bytes()
-    : format(BytesFormat::ascii),
-      formater(std::make_unique<Format>()),
-      converter(std::make_unique<Convert>()),
-      xorer(std::make_unique<Xor>()) {}
+    : format(BytesFormat::ascii)
+{}
 
 /*
 
@@ -57,7 +54,7 @@ std::string Bytes::displayInFormat(const BytesFormat& format)
 
 /*
 
-    Xor
+    Xor Methods
 
 */
 
@@ -73,12 +70,50 @@ Bytes Bytes::singleByteXor(const uint8_t& byteAgainst)
     return Bytes(this->xorer->singleByteXor(this->bytes, byteAgainst), this->format);
 }
 
+// Xor each bit of Bytes against a repeating key
+Bytes Bytes::repeatingKeyXor(Bytes& key)
+{
+    return Bytes(this->xorer->repeatingKeyXor(this->bytes, key.getBytesAs(this->format)), this->format);
+}
+
+/*
+
+    Frequency Methods
+
+*/
+
+// Returns the degree to which the Bytes object has a normal ascii frequency
+// The closer to 0, the better
+// TODO: Cache result
+double Bytes::getNormalFrequencyDegree()
+{
+    if (this->currentNormalFrequencyDegree == 0)
+        this->updateNormalFrequencyDegree();
+    return this->currentNormalFrequencyDegree;
+}
+
+
+void Bytes::updateNormalFrequencyDegree()
+{
+    this->currentNormalFrequencyDegree = this->frequency->compareNormalAsciiFrequency(this->frequency->getAsciiFrequency(this->bytes));
+}
+
+// Checks whether the current Bytes contains ascii values above 127
+bool Bytes::containsIncorrectAscii()
+{
+    for (const uint8_t& i : this->bytes)
+        if (i > 127)
+            return true;
+    return false;
+}
+
 /*
 
     Decoding Methods
 
 */
 
+// Decodes ascii characters in a specified format to their numerical format
 void Bytes::decodeFrom(const BytesFormat& format)
 {
     switch (format)

@@ -31,7 +31,7 @@ std::vector<uint8_t> Convert::convertToAsciiFromBase64(const std::vector<uint8_t
 {
     std::vector<uint8_t> ascii;
     uint32_t current;
-
+    
     for (int i = 0; i < bytes.size(); i += 4)
     {
         // Extracts 4 6-bit base64 values

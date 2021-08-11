@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\chanc\Documents\Projects\cryptopals\CryptoPals\05repeatingkeyxor\main.cpp(20,10): warning C4101: 'inputByte': unreferenced local variable
+  05repeatingkeyxor.vcxproj -> C:\Users\chanc\Documents\Projects\cryptopals\CryptoPals\Debug\05repeatingkeyxor.exe

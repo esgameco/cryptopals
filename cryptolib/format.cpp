@@ -120,5 +120,8 @@ std::vector<uint8_t> Format::decodeBase64FromAscii(const std::vector<uint8_t>& b
         }
     }
 
+    if (base64.size() % 2 == 1)
+        base64.push_back(0);
+
     return base64;
 }

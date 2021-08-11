@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="bytes.cpp" />
     <ClCompile Include="convert.cpp" />
+    <ClCompile Include="decrypt.cpp" />
     <ClCompile Include="format.cpp" />
     <ClCompile Include="frequency.cpp" />
     <ClCompile Include="xor.cpp" />
@@ -152,9 +153,13 @@
   <ItemGroup>
     <ClInclude Include="bytes.h" />
     <ClInclude Include="convert.h" />
+    <ClInclude Include="decrypt.h" />
     <ClInclude Include="format.h" />
     <ClInclude Include="frequency.h" />
     <ClInclude Include="xor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\freq.data" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -30,6 +30,9 @@
     <ClCompile Include="bytes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="decrypt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bytes.h">
@@ -47,5 +50,13 @@
     <ClInclude Include="xor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="decrypt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\freq.data">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -8,17 +8,21 @@
 */
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <cinttypes>
 #include <vector>
 #include <streambuf>
+#include <fstream>
 
 class Frequency
 {
-    public:
-    std::vector<uint8_t> getAsciiFrequency(const std::vector<uint8_t>&);
-    double compareNormalAsciiFrequency(const std::vector<uint8_t>&, uint16_t);
+public:
+    std::vector<double> getAsciiFrequency(const std::vector<uint8_t>&);
+    double compareNormalAsciiFrequency(const std::vector<double>&);
 
-    private:
+protected:
+    static std::vector<double> asciiFrequency;
+
+private:
     std::vector<double> loadFrequency(std::string);
 };

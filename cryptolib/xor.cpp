@@ -1,10 +1,12 @@
 #include "xor.h"
 
-//----------------------------------------------------------------//
-//-----------------------------(Xor)------------------------------//
-//----------------------------------------------------------------//
+/*
 
-std::vector<uint8_t> Xor::fixedXor(std::vector<uint8_t> base, std::vector<uint8_t> add)
+    XOR Methods
+
+*/
+
+std::vector<uint8_t> Xor::fixedXor(const std::vector<uint8_t>& base, const std::vector<uint8_t>& add)
 {
     std::vector<uint8_t> xored;
     if (base.size() != add.size())
@@ -20,13 +22,25 @@ std::vector<uint8_t> Xor::fixedXor(std::vector<uint8_t> base, std::vector<uint8_
     return xored;
 }
 
-std::vector<uint8_t> Xor::singleByteXor(std::vector<uint8_t> bytes, uint8_t xorByte)
+std::vector<uint8_t> Xor::singleByteXor(const std::vector<uint8_t>& bytes, uint8_t xorByte)
 {
     std::vector<uint8_t> xored;
 
     for (int i = 0; i < bytes.size(); i++)
     {
         xored.push_back(bytes[i]^xorByte);
+    }
+
+    return xored;
+}
+
+std::vector<uint8_t> Xor::repeatingKeyXor(const std::vector<uint8_t>& bytes, const std::vector<uint8_t>& key)
+{
+    std::vector<uint8_t> xored;
+
+    for (int i = 0; i < bytes.size(); i++)
+    {
+        xored.push_back(bytes[i] ^ key[i % key.size()]);
     }
 
     return xored;

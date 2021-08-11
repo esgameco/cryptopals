@@ -55,9 +55,17 @@ public:
     // Xor
     Bytes fixedXor(Bytes&);
     Bytes singleByteXor(const uint8_t&);
+    Bytes repeatingKeyXor(Bytes&);
 
     // Frequency
+    double getNormalFrequencyDegree();
+    bool containsIncorrectAscii();
 
+protected:
+    static std::unique_ptr<Format> formater;
+    static std::unique_ptr<Convert> converter;
+    static std::unique_ptr<Xor> xorer;
+    static std::unique_ptr<Frequency> frequency;
 
 private:
     // Private Methods
@@ -67,11 +75,13 @@ private:
     // Format Conversions
     void convertFrom(const BytesFormat&);
 
+    // Private Frequency
+    void updateNormalFrequencyDegree();
+
     // Member Variables
     BytesFormat format;
     std::vector<uint8_t> bytes;
 
-    std::unique_ptr<Format> formater;
-    std::unique_ptr<Convert> converter;
-    std::unique_ptr<Xor> xorer;
+    // Cache Values
+    double currentNormalFrequencyDegree;
 };

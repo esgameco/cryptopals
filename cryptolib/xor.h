@@ -14,7 +14,8 @@
 
 class Xor
 {
-    public:
-    std::vector<uint8_t> fixedXor(std::vector<uint8_t>, std::vector<uint8_t>);
-    std::vector<uint8_t> singleByteXor(std::vector<uint8_t>, uint8_t);
+public:
+    std::vector<uint8_t> fixedXor(const std::vector<uint8_t>&, const std::vector<uint8_t>&);
+    std::vector<uint8_t> singleByteXor(const std::vector<uint8_t>&, uint8_t);
+    std::vector<uint8_t> repeatingKeyXor(const std::vector<uint8_t>&, const std::vector<uint8_t>&);
 };
